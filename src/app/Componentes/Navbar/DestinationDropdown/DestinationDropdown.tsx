@@ -50,11 +50,11 @@ export default function DestinationDropdown({ isMobile = false }) {
 
       {isOpen && (
         <div
-          className={`${
+          className={`bg-white border border-gray-200 rounded-md z-50 ${
             isMobile
-              ? "pl-4 mt-1"
-              : "absolute left-0 top-full mt-3 w-56 shadow-lg z-50"
-          } bg-white border border-gray-200 rounded-md overflow-hidden`}
+              ? "mt-2 max-h-60 overflow-y-auto w-full" // ✅ SCROLLABLE on mobile
+              : "absolute mt-3 w-56 left-0 shadow-lg"
+          }`}
         >
           <ul className="divide-y divide-gray-100">
             {destinations.map((destination) => (

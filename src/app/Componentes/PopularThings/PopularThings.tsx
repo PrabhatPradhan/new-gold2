@@ -19,6 +19,7 @@ const activities = [
   { title: 'Beach Tours', icon: <FaUmbrellaBeach />, tours: '100+ Tours' },
   { title: 'Tours Food ', icon: <FaUtensils />, tours: '100+ Tours' },
   { title: 'Spirituals Tour', icon: <FaUtensils />, tours: '100+ Tours' },
+  
 ];
 
 export default function PopularThingsToDo() {
