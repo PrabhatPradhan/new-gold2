@@ -12,6 +12,7 @@ import {
   FaBinoculars,
   FaSlidersH,
 } from "react-icons/fa";
+import { FaMapMarkerAlt } from "react-icons/fa"; // 📍
 
 import Image from "next/image";
 
@@ -21,13 +22,6 @@ const galleryImages = [
   "/Images/ditls-3.jpeg",
   "/Images/ditls-4.jpeg",
   "/Images/ditls-5.jpeg",
-];
-
-const navTabs = [
-  { icon: <FaMapMarkedAlt />, label: "Overview" },
-  { icon: <FaListUl />, label: "Inclusion" },
-  { icon: <FaBinoculars />, label: "Exclusion" },
-  { icon: <FaSlidersH />, label: "Days" },
 ];
 
 export default function TourUI() {
@@ -123,7 +117,7 @@ export default function TourUI() {
       <Navbar />
       <div className="w-full min-h-screen relative mt-26 ">
         <div className="flex flex-col lg:flex-row w-full">
-          <div className="flex-1 bg-white p-4 overflow-y-auto">
+          <div className="flex-1 bg-white p-4  ">
             <div className="relative w-full h-96 rounded overflow-hidden ">
               <Image
                 src={galleryImages[currentImage]}
@@ -151,27 +145,64 @@ export default function TourUI() {
 
             <PackageHeaderdetail />
 
-            <div className="flex gap-3 p-4 flex-wrap mt-6">
-              {navTabs.map((tab, idx) => (
-                <button
-                  key={idx}
-                  className={`flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium shadow-md transition-all duration-300
-        ${
-          idx === 0
-            ? "bg-gradient-to-r from-blue-600 to-indigo-600 text-white"
-            : "bg-white text-gray-700 border border-gray-300 hover:bg-gray-100"
-        } hover:scale-105`}
-                >
-                  <span className="text-lg">{tab.icon}</span>
-                  <span>{tab.label}</span>
-                </button>
-              ))}
+            <div className="flex gap-3 p-4 flex-wrap mt-6 bg-white z-0 sticky top-[100px] shadow-md">
+            <a href="#Overview"> <button className="flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium shadow-md transition-all duration-300 cursor-pointer bg-gradient-to-r from-blue-600 to-indigo-600 text-white hover:scale-105">
+                <FaMapMarkedAlt className="text-lg" />
+                <span>Overview</span>
+              </button></a>
+              <a href="#Day">
+              <button className="flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium shadow-md transition-all duration-300 cursor-pointer bg-white text-gray-700 border border-gray-300 hover:bg-gray-100 hover:scale-105">
+                <FaSlidersH className="text-lg" />
+                <span>Days</span>
+              </button>
+              </a>
+              <a href="#Inclusion">
+              <button className="flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium shadow-md transition-all duration-300 cursor-pointer bg-white text-gray-700 border border-gray-300 hover:bg-gray-100 hover:scale-105">
+                <FaListUl className="text-lg" />
+                <span>Inclusion</span>
+              </button>
+              </a>
+              <a href="#Inclusion">
+              <button className="flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium shadow-md transition-all duration-300 cursor-pointer bg-white text-gray-700 border border-gray-300 hover:bg-gray-100 hover:scale-105">
+                <FaBinoculars className="text-lg" />
+                <span>Exclusion</span>
+              </button></a>
             </div>
 
             <hr />
-            <InclusionExclusion />
+            {/*  Our Tour Details */}
+            <section className="max-w-5xl mx-auto mt-2 px-4 py-6 bg-white rounded-xl shadow-md space-y-4" id="Overview">
+              <h2 className="text-2xl font-bold text-center text-yellow-700">
+                Our Tour Details
+              </h2>
 
-            <div className="border rounded-lg p-6 bg-white mt-12">
+              <p className="text-gray-700 leading-relaxed">
+                <strong>Scenic Manali Volvo Tour by Gold Tour Travel</strong>{" "}
+                <br />
+                Discover the beauty of Manali with our all-inclusive Volvo
+                package from Delhi. Travel in comfort with Volvo coaches, stay
+                in premium hotels, and explore breathtaking spots like{" "}
+                <strong>Solang Valley</strong>, <strong>Hadimba Temple</strong>,
+                and the famous <strong>Mall Road</strong>. A perfect getaway for
+                couples, families, and friends seeking mountain bliss.
+              </p>
+
+              <p className="text-gray-700 leading-relaxed">
+                Enjoy well-planned itineraries, seamless transfers, and
+                top-notch services. Your comfort and satisfaction are our top
+                priorities. Trust Gold Tour Travel to turn your holidays into
+                unforgettable memories.
+              </p>
+
+              <p className="text-gray-700 leading-relaxed">
+                From snow adventures to cozy mountain evenings, experience
+                Manali like never before. Contact Gold Tour Travel today to
+                reserve your dream trip and enjoy a relaxing and adventurous
+                escape in the Himalayas.
+              </p>
+            </section>
+            {/* Day wise travel itinerary   */}
+            <div className="shadow-lg rounded-lg p-6 bg-white mt-12" id="Day">
               <h2 className="text-2xl font-semibold flex items-center gap-2 mb-4">
                 <FaListUl className="text-blue-500 text-3xl" />
                 Day wise travel itinerary
@@ -180,17 +211,20 @@ export default function TourUI() {
               <div className="space-y-6 text-sm leading-relaxed">
                 {visibleItinerary.map((item, index) => (
                   <div key={index}>
-                    <hr />
-                    <p className="text-red-500 mt-2 font-semibold">
+                    <p className="text-red-500 mt-2 font-semibold flex items-center gap-1">
+                      <FaMapMarkerAlt className="text-red-500" />
                       {item.day}:{" "}
                       <span className="text-black font-bold">{item.title}</span>
                     </p>
+
                     <p>{item.description}</p>
+
                     {item.note && (
                       <p className="text-xs font-semibold italic mt-1">
                         Note: {item.note}
                       </p>
                     )}
+
                     <p className="font-semibold">
                       Included Meals:{" "}
                       <span className="font-normal">{item.meals}</span>
@@ -210,8 +244,13 @@ export default function TourUI() {
                 </div>
               )}
             </div>
-          </div>
 
+            <div id="Inclusion">
+            <InclusionExclusion />
+            </div>
+           
+          </div>
+          {/* right form  */}
           <div className="w-full lg:w-1/3 bg-gray-100 p-6 flex flex-col gap-1 sticky top-20 self-start h-fit">
             <div className="md:static md:mt-0 fixed bottom-0 left-0 w-full bg-white shadow-md p-4 z-50 md:w-auto md:bg-transparent md:shadow-none">
               <h2 className="text-xl font-semibold">Starting Price</h2>

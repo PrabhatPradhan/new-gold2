@@ -29,30 +29,7 @@ export default function InclusionExclusion() {
 
   return (
     <>
-      <section className="max-w-4xl mx-auto mt-2 px-4 py-6 bg-white rounded-xl shadow-md space-y-4">
-  <h2 className="text-2xl font-bold text-center text-yellow-700">
-    Our Tour Details
-  </h2>
-
-  <p className="text-gray-700 leading-relaxed">
-    <strong>Scenic Manali Volvo Tour by Gold Tour Travel</strong> <br />
-    Discover the beauty of Manali with our all-inclusive Volvo package from Delhi. Travel in comfort with Volvo coaches,
-    stay in premium hotels, and explore breathtaking spots like <strong>Solang Valley</strong>, <strong>Hadimba Temple</strong>,
-    and the famous <strong>Mall Road</strong>. A perfect getaway for couples, families, and friends seeking mountain bliss.
-  </p>
-
-  <p className="text-gray-700 leading-relaxed">
-    Enjoy well-planned itineraries, seamless transfers, and top-notch services. Your comfort and satisfaction are
-    our top priorities. Trust Gold Tour Travel to turn your holidays into unforgettable memories.
-  </p>
-
-  <p className="text-gray-700 leading-relaxed">
-    From snow adventures to cozy mountain evenings, experience Manali like never before. Contact Gold Tour Travel
-    today to reserve your dream trip and enjoy a relaxing and adventurous escape in the Himalayas.
-  </p>
-
-   
-</section>
+    
 
 
       <div className="max-w-4xl mx-auto mt-10 p-4 space-y-8">

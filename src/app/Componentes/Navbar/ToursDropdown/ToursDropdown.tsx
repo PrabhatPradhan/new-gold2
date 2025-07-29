@@ -34,7 +34,7 @@ export default function ToursDropdown({ isMobile = false }: { isMobile?: boolean
           onClick={() => setIsOpen(!isOpen)}
           className="flex items-center justify-between w-full text-base font-medium text-gray-800"
         >
-          <span>Tours</span>
+          <span> International tour</span>
           <IoIosArrowDown
             className={`text-sm ml-2 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
           />
@@ -65,7 +65,7 @@ export default function ToursDropdown({ isMobile = false }: { isMobile?: boolean
         onClick={() => setIsOpen(!isOpen)}
         className="flex items-center gap-1 text-gray-800 font-medium hover:text-black"
       >
-        Tours
+         International tour
         <IoIosArrowDown
           className={`text-sm transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
         />

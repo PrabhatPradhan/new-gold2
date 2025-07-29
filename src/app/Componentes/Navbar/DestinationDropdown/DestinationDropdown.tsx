@@ -40,7 +40,7 @@ export default function DestinationDropdown({ isMobile = false }) {
         onClick={() => setIsOpen(!isOpen)}
         className="flex items-center gap-1 text-gray-800 font-semibold text-base"
       >
-        Destination
+        Indian Tour 
         <IoIosArrowDown
           className={`text-sm mt-[1px] transition-transform duration-200 ${
             isOpen ? "rotate-180" : ""
