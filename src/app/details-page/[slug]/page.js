@@ -171,7 +171,7 @@ export default function TourUI() {
 
             <hr />
             {/*  Our Tour Details */}
-            <section className="max-w-5xl mx-auto mt-2 px-4 py-6 bg-white rounded-xl shadow-md space-y-4" id="Overview">
+            <section className="max-w-5xl mx-auto mt-2 px-4 py-6 bg-white rounded-xl shadow-md space-y-4">
               <h2 className="text-2xl font-bold text-center text-yellow-700">
                 Our Tour Details
               </h2>
@@ -203,47 +203,51 @@ export default function TourUI() {
             </section>
             {/* Day wise travel itinerary   */}
             <div className="shadow-lg rounded-lg p-6 bg-white mt-12" id="Day">
-              <h2 className="text-2xl font-semibold flex items-center gap-2 mb-4">
-                <FaListUl className="text-blue-500 text-3xl" />
-                Day wise travel itinerary
-              </h2>
-              <hr />
-              <div className="space-y-6 text-sm leading-relaxed">
-                {visibleItinerary.map((item, index) => (
-                  <div key={index}>
-                    <p className="text-red-500 mt-2 font-semibold flex items-center gap-1">
-                      <FaMapMarkerAlt className="text-red-500" />
-                      {item.day}:{" "}
-                      <span className="text-black font-bold">{item.title}</span>
-                    </p>
+  <h2 className="text-2xl font-semibold flex items-center gap-2 mb-4">
+    <FaListUl className="text-blue-500 text-3xl" />
+    Day wise travel itinerary
+  </h2>
+  <hr />
+  <div className="space-y-6 text-sm leading-relaxed">
+    {visibleItinerary.map((item, index) => (
+      <div
+        key={index}
+        className="bg-gray-50 p-4 rounded-lg shadow-md border border-gray-100"
+      >
+        <p className="text-red-500 mt-2 font-semibold flex items-center gap-1">
+          <FaMapMarkerAlt className="text-red-500" />
+          {item.day}:{" "}
+          <span className="text-black font-bold">{item.title}</span>
+        </p>
 
-                    <p>{item.description}</p>
+        <p>{item.description}</p>
 
-                    {item.note && (
-                      <p className="text-xs font-semibold italic mt-1">
-                        Note: {item.note}
-                      </p>
-                    )}
+        {item.note && (
+          <p className="text-xs font-semibold italic mt-1">
+            Note: {item.note}
+          </p>
+        )}
 
-                    <p className="font-semibold">
-                      Included Meals:{" "}
-                      <span className="font-normal">{item.meals}</span>
-                    </p>
-                  </div>
-                ))}
-              </div>
+        <p className="font-semibold mt-1">
+          Included Meals:{" "}
+          <span className="font-normal">{item.meals}</span>
+        </p>
+      </div>
+    ))}
+  </div>
 
-              {!showAll && (
-                <div className="text-center mt-6">
-                  <button
-                    onClick={() => setShowAll(true)}
-                    className="px-5 py-2 bg-blue-600 text-white cursor-pointer rounded hover:bg-blue-700 transition"
-                  >
-                    Read More
-                  </button>
-                </div>
-              )}
-            </div>
+  {!showAll && (
+    <div className="text-center mt-6">
+      <button
+        onClick={() => setShowAll(true)}
+        className="px-5 py-2 bg-blue-600 text-white cursor-pointer rounded hover:bg-blue-700 transition"
+      >
+        Read More
+      </button>
+    </div>
+  )}
+</div>
+
 
             <div id="Inclusion">
             <InclusionExclusion />
