@@ -27,7 +27,7 @@ export default function PackageHeader() {
           <FaStar className="text-yellow-400" />
         </div>
 
-        <span className="text-sm text-blue-600 underline cursor-pointer">
+        <span className="text-sm    cursor-pointer">
           4.5 * Reviews
         </span>
         <span className="text-sm text-red-500">(189 reviews)</span>

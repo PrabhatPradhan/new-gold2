@@ -1,7 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+ 
+
 import InclusionExclusion from "../../Componentes/InclusionExclusion/InclusionExclusion";
 import PackageHeaderdetail from "../../Componentes/PackageHeaderdetail/PackageHeaderdetail";
 import Navbar from "../../Componentes/Navbar/Navbar";
@@ -28,6 +30,17 @@ export default function TourUI() {
   const [currentImage, setCurrentImage] = useState(0);
   const [showAll, setShowAll] = useState(false);
 
+  // Auto slide every 3 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImage((prev) =>
+        prev === galleryImages.length - 1 ? 0 : prev + 1
+      );
+    }, 1000); // 3 seconds
+
+    return () => clearInterval(interval); // cleanup on unmount
+  }, [galleryImages.length]);
+
   const handlePrev = () => {
     setCurrentImage((prev) =>
       prev === 0 ? galleryImages.length - 1 : prev - 1
@@ -39,7 +52,6 @@ export default function TourUI() {
       prev === galleryImages.length - 1 ? 0 : prev + 1
     );
   };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     alert("Inquiry form submitted!");
@@ -118,12 +130,12 @@ export default function TourUI() {
       <div className="w-full min-h-screen relative mt-26 ">
         <div className="flex flex-col lg:flex-row w-full">
           <div className="flex-1 bg-white p-4  ">
-            <div className="relative w-full h-96 rounded overflow-hidden ">
+            <div className="relative w-full h-96 rounded overflow-hidden">
               <Image
                 src={galleryImages[currentImage]}
                 alt="Gallery Image"
                 fill
-                className="object-cover rounded"
+                className="object-cover rounded transition-all duration-500"
               />
               <div className="absolute top-1/2 left-2 transform -translate-y-1/2">
                 <button
@@ -146,26 +158,29 @@ export default function TourUI() {
             <PackageHeaderdetail />
 
             <div className="flex gap-3 p-4 flex-wrap mt-6 bg-white z-0 sticky top-[100px] shadow-md">
-            <a href="#Overview"> <button className="flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium shadow-md transition-all duration-300 cursor-pointer bg-gradient-to-r from-blue-600 to-indigo-600 text-white hover:scale-105">
-                <FaMapMarkedAlt className="text-lg" />
-                <span>Overview</span>
-              </button></a>
+              <a href="#Overview">
+                {" "}
+                <button className="flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium shadow-md transition-all duration-300 cursor-pointer bg-gradient-to-r from-blue-600 to-indigo-600 text-white hover:scale-105">
+                  <FaMapMarkedAlt className="text-lg" />
+                  <span>Overview</span>
+                </button>
+              </a>
               <a href="#Day">
-              <button className="flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium shadow-md transition-all duration-300 cursor-pointer bg-white text-gray-700 border border-gray-300 hover:bg-gray-100 hover:scale-105">
-                <FaSlidersH className="text-lg" />
-                <span>Days</span>
-              </button>
+                <button className="flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium shadow-md transition-all duration-300 cursor-pointer bg-white text-gray-700 border border-gray-300 hover:bg-gray-100 hover:scale-105">
+                  <FaSlidersH className="text-lg" />
+                  <span>Days</span>
+                </button>
               </a>
               <a href="#Inclusion">
-              <button className="flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium shadow-md transition-all duration-300 cursor-pointer bg-white text-gray-700 border border-gray-300 hover:bg-gray-100 hover:scale-105">
-                <FaListUl className="text-lg" />
-                <span>Inclusion</span>
-              </button>
+                <button className="flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium shadow-md transition-all duration-300 cursor-pointer bg-white text-gray-700 border border-gray-300 hover:bg-gray-100 hover:scale-105">
+                  <FaListUl className="text-lg" />
+                  <span>Inclusion & Exclusion</span>
+                </button>
               </a>
-              <a href="#Inclusion">
+              <a href="#Map">
               <button className="flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium shadow-md transition-all duration-300 cursor-pointer bg-white text-gray-700 border border-gray-300 hover:bg-gray-100 hover:scale-105">
-                <FaBinoculars className="text-lg" />
-                <span>Exclusion</span>
+                <FaMapMarkedAlt className="text-lg" />
+                <span>Map</span>
               </button></a>
             </div>
 
@@ -203,57 +218,81 @@ export default function TourUI() {
             </section>
             {/* Day wise travel itinerary   */}
             <div className="shadow-lg rounded-lg p-6 bg-white mt-12" id="Day">
-  <h2 className="text-2xl font-semibold flex items-center gap-2 mb-4">
-    <FaListUl className="text-blue-500 text-3xl" />
-    Day wise travel itinerary
-  </h2>
-  <hr />
-  <div className="space-y-6 text-sm leading-relaxed">
-    {visibleItinerary.map((item, index) => (
-      <div
-        key={index}
-        className="bg-gray-50 p-4 rounded-lg shadow-md border border-gray-100"
-      >
-        <p className="text-red-500 mt-2 font-semibold flex items-center gap-1">
-          <FaMapMarkerAlt className="text-red-500" />
-          {item.day}:{" "}
-          <span className="text-black font-bold">{item.title}</span>
-        </p>
+              <h2 className="text-2xl font-semibold flex items-center gap-2 mb-4">
+                <FaListUl className="text-blue-500 text-3xl" />
+                Day wise travel itinerary
+              </h2>
+              <hr />
+              <div className="space-y-6 text-sm leading-relaxed">
+                {visibleItinerary.map((item, index) => (
+                  <div
+                    key={index}
+                    className="bg-gray-50 p-4 rounded-lg shadow-md border border-gray-100"
+                  >
+                    <p className="text-red-500 mt-2 font-semibold flex items-center gap-1">
+                      <FaMapMarkerAlt className="text-red-500" />
+                      {item.day}:{" "}
+                      <span className="text-black font-bold">{item.title}</span>
+                    </p>
 
-        <p>{item.description}</p>
+                    <p>{item.description}</p>
 
-        {item.note && (
-          <p className="text-xs font-semibold italic mt-1">
-            Note: {item.note}
-          </p>
-        )}
+                    {item.note && (
+                      <p className="text-xs font-semibold italic mt-1">
+                        Note: {item.note}
+                      </p>
+                    )}
 
-        <p className="font-semibold mt-1">
-          Included Meals:{" "}
-          <span className="font-normal">{item.meals}</span>
-        </p>
-      </div>
-    ))}
-  </div>
+                    <p className="font-semibold mt-1">
+                      Included Meals:{" "}
+                      <span className="font-normal">{item.meals}</span>
+                    </p>
+                  </div>
+                ))}
+              </div>
 
-  {!showAll && (
-    <div className="text-center mt-6">
-      <button
-        onClick={() => setShowAll(true)}
-        className="px-5 py-2 bg-blue-600 text-white cursor-pointer rounded hover:bg-blue-700 transition"
-      >
-        Read More
-      </button>
-    </div>
-  )}
-</div>
-
+              {!showAll && (
+                <div className="text-center mt-6">
+                  <button
+                    onClick={() => setShowAll(true)}
+                    className="px-5 py-2 bg-blue-600 text-white cursor-pointer rounded hover:bg-blue-700 transition"
+                  >
+                    Read More
+                  </button>
+                </div>
+              )}
+            </div>
 
             <div id="Inclusion">
-            <InclusionExclusion />
+              <InclusionExclusion />
             </div>
-           
+
+            <div className="max-w-5xl mx-auto p-4" id="Map">
+              {/* Heading */}
+              <h2 className="text-2xl font-semibold mb-2">Tour Map</h2>
+
+              {/* Description Paragraph */}
+              <p className="text-gray-700 text-sm md:text-base leading-relaxed mb-6">
+                Explore your journey through our interactive tour map. Discover
+                exciting destinations, experience local culture, and plan your
+                adventures with ease using this visual guide.
+              </p>
+
+              {/* Google Map Iframe */}
+              <div className="w-full h-80 md:h-[450px] rounded-lg overflow-hidden shadow-md">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31562.063303317025!2d78.032191!3d27.175015!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x397371c0aeaf1fc9%3A0xb06ab45f4df1cf66!2sTaj%20Mahal!5e0!3m2!1sen!2sin!4v1651234567890!5m2!1sen!2sin"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen=""
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                ></iframe>
+              </div>
+            </div>
           </div>
+
           {/* right form  */}
           <div className="w-full lg:w-1/3 bg-gray-100 p-6 flex flex-col gap-1 sticky top-20 self-start h-fit">
             <div className="md:static md:mt-0 fixed bottom-0 left-0 w-full bg-white shadow-md p-4 z-50 md:w-auto md:bg-transparent md:shadow-none">

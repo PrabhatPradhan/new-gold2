@@ -15,6 +15,7 @@ import { MdCall } from "react-icons/md";
 // Dummy Navbar & Footer
 import Navbar from "../../Componentes/Navbar/Navbar";
 import Footer from "../../Componentes/Footer/Footer";
+import DetailSearchSortBar from "../../Componentes/DetailSearchSortBar/DetailSearchSortBar"
 import Link from "next/link";
 // Data
 const tourPackages = [
@@ -247,6 +248,7 @@ export default function PackagesPage() {
 
         {/* Packages */}
         <div className="w-full  p-4 md:p-6">
+          <DetailSearchSortBar/>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredPackages.map((data) => (
               <div
